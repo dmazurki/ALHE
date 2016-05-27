@@ -17,6 +17,7 @@ class SimulatedAnnealing:
             if y_energy > x_energy or random.random() < self.__tolerance(x_energy, y_energy):
                 x = y
             self.log.append(y)
+            iteration += iteration
 
     def get_runtime(self):
         pass

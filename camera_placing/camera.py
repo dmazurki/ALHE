@@ -4,29 +4,31 @@ from math import sqrt as sqrt
 
 
 class Camera:
-    visionRange = 10
-    visionAngle = 60
 
-    def __init__(self, xPos, yPos, anglePos):
-        self.xPos = xPos
-        self.yPos = yPos
-        self.anglePos = anglePos
+    def __init__(self, x_pos, y_pos, angle, problem):
+        self.x = x_pos
+        self.y = y_pos
+        self.angle = angle
+        self.problem = problem
 
     def is_point_visible(self, x, y):
-        x1 = self.xPos
-        y1 = self.yPos
+        x1 = self.x
+        y1 = self.y
         distance = sqrt((x1 - x) ** 2 + (y1 - y) ** 2)
-        if distance > self.visionRange:
+        if distance > self.problem.camera_vision_range:
             return False
-        halfOfAngle = self.radius_to_radian(self.visionAngle / 2)
-        angleBase = self.radius_to_radian((self.anglePos / 8) * 360)
-        x2 = x1 + self.visionRange * cos(halfOfAngle + angleBase)
-        y2 = y1 + self.visionRange * sin(halfOfAngle + angleBase)
-        x3 = x1 + self.visionRange * cos(angleBase - halfOfAngle)
-        y3 = y1 + self.visionRange * sin(angleBase - halfOfAngle)
+        half_of_angle = self.radius_to_radian(self.problem.camera_vision_angle / 2)
+        angle_base = self.radius_to_radian((self.angle / 8) * 360)
+        x2 = x1 + self.problem.camera_vision_range * cos(half_of_angle + angle_base)
+        y2 = y1 + self.problem.camera_vision_range * sin(half_of_angle + angle_base)
+        x3 = x1 + self.problem.camera_vision_range * cos(angle_base - half_of_angle)
+        y3 = y1 + self.problem.camera_vision_range * sin(angle_base - half_of_angle)
         if self.to_the_right_of_line(x1, y1, x2, y2, x, y) and self.to_the_left_of_line(x1, y1, x3, y3, x, y):
             return True
         return False
+
+    def clone(self):
+        return Camera(self.x, self.y, self.angle, self.problem)
 
     @staticmethod
     def to_the_left_of_line(x1, y1, x2, y2, pX, pY):
