@@ -29,12 +29,24 @@ class BoardUtils:
     def __init__(self):
         pass
 
-    def get_board_from_file(self, filename):
-        pass
+    @staticmethod
+    def get_board_from_file(filename):
+        f = open(filename, 'r')
+        result = [[]]
+        for line in f:
+            for character in line:
+                if character == '0':
+                    result[-1].append(False)
+                elif character == '1':
+                    result[-1].append(True)
+                elif character == ';':
+                    result.append([])
+        f.close()
+        return result
+
 
     @staticmethod
     def get_board_from_string(board_string):
-
         result = [[]]
         for character in board_string:
             if character == '0':
