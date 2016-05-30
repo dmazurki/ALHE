@@ -1,4 +1,5 @@
 import random
+import math
 
 
 class SimulatedAnnealing:
@@ -7,20 +8,24 @@ class SimulatedAnnealing:
         self.temperature = temperature
         self.log = []
 
-        self.log.append(self.problem.generate_initial_state())
-        x = self.log[0]
+        x = self.problem.generate_initial_state()
         iteration = 0
-        while self.temperature(iteration) > 0:
+        temperature = self.temperature(iteration)
+        while temperature > 0.01:
             y = x.get_neighbour()
             x_energy = self.problem.energy(x)
             y_energy = self.problem.energy(y)
-            if y_energy > x_energy or random.random() < self.__tolerance(x_energy, y_energy):
+            tolerance =  self.tolerance(x_energy, y_energy, temperature)
+            if y_energy < x_energy or random.random() < tolerance:
                 x = y
-            self.log.append(y)
-            iteration += iteration
+            iteration += 1
+            temperature = self.temperature(iteration)
+            print x_energy, tolerance
+        self.result = x
 
-    def get_runtime(self):
-        pass
+    def get_result(self):
+        return self.result
 
-    def __tolerance(self, x_energy, y_energy):
-        pass
+    @staticmethod
+    def tolerance(x_energy, y_energy, temperature):
+        return math.exp(-math.fabs(y_energy-x_energy)/temperature)

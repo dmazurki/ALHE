@@ -3,11 +3,14 @@ from camera_placing import camera
 
 
 class State:
-    def __init__(self, problem):
+    def __init__(self, problem, cameras=None):
         self.problem = problem
-        self.xMax = len(self.problem.board)
-        self.yMax = len(self.problem.board[0])
-        self.cameras = []
+        self.xMax = len(self.problem.board) - 1
+        self.yMax = len(self.problem.board[0]) - 1
+        if not cameras:
+            self.cameras = []
+        else:
+            self.cameras = cameras
 
     def get_neighbour(self):
         new_cameras = [cam.clone() for cam in self.cameras]
@@ -24,6 +27,8 @@ class State:
         else:
             self.remove_camera(new_cameras)
 
+        return State(self.problem, new_cameras)
+
     def mutate_cameras_positions(self, cameras):
         if len(cameras) == 0:
             return
@@ -37,7 +42,7 @@ class State:
         while self.problem.board[cam_x][cam_y]:
             cam_x = random.randint(0, self.xMax)
             cam_y = random.randint(0, self.yMax)
-        new_cam = camera.Camera(cam_x, cam_y, angle)
+        new_cam = camera.Camera(cam_x, cam_y, angle, self.problem)
         cameras.append(new_cam)
 
     def remove_camera(self, cameras):
@@ -52,7 +57,7 @@ class State:
         while not self.point_in_boundaries(old_x + x_diff, old_y + y_diff):
             x_diff = random.randint(-1, 1)
             y_diff = random.randint(-1, 1)
-        new_angle = (cam.anglePos + random.randint(-1, 1)) % 8
+        new_angle = (cam.angle + random.randint(-1, 1)) % 8
         cam.x = old_x + x_diff
         cam.y = old_y + y_diff
         cam.angle = new_angle
@@ -65,3 +70,6 @@ class State:
         if self.problem.board[x][y]:
             return False
         return True
+
+    def __str__(self):
+        return str(self.cameras)

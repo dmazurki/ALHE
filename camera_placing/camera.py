@@ -4,14 +4,13 @@ from math import sqrt as sqrt
 
 
 class Camera:
-
     def __init__(self, x_pos, y_pos, angle, problem):
         self.x = x_pos
         self.y = y_pos
         self.angle = angle
         self.problem = problem
 
-    def is_point_visible(self, x, y):
+    def point_visible(self, x, y):
         x1 = self.x
         y1 = self.y
         distance = sqrt((x1 - x) ** 2 + (y1 - y) ** 2)
@@ -53,3 +52,6 @@ class Camera:
     @staticmethod
     def radius_to_radian(angle):
         return (angle / 360) * 2 * 3.14
+
+    def __repr__(self):
+        return '(' + str(self.x) + ', ' + str(self.y) + ', ' + str(self.angle) + ')'
