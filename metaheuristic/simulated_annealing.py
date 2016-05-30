@@ -6,7 +6,6 @@ class SimulatedAnnealing:
     def __init__(self, problem, temperature):
         self.problem = problem
         self.temperature = temperature
-        self.log = []
 
         x = self.problem.generate_initial_state()
         iteration = 0
@@ -15,7 +14,7 @@ class SimulatedAnnealing:
             y = x.get_neighbour()
             x_energy = self.problem.energy(x)
             y_energy = self.problem.energy(y)
-            tolerance =  self.tolerance(x_energy, y_energy, temperature)
+            tolerance = self.tolerance(x_energy, y_energy, temperature)
             if y_energy < x_energy or random.random() < tolerance:
                 x = y
             iteration += 1
@@ -28,4 +27,4 @@ class SimulatedAnnealing:
 
     @staticmethod
     def tolerance(x_energy, y_energy, temperature):
-        return math.exp(-math.fabs(y_energy-x_energy)/temperature)
+        return math.exp(-math.fabs(y_energy - x_energy) / temperature)

@@ -17,7 +17,7 @@ class Camera:
         if distance > self.problem.camera_vision_range:
             return False
         half_of_angle = self.radius_to_radian(self.problem.camera_vision_angle / 2)
-        angle_base = self.radius_to_radian((self.angle / 8) * 360)
+        angle_base = self.radius_to_radian((self.angle/8) * 360)
         x2 = x1 + self.problem.camera_vision_range * cos(half_of_angle + angle_base)
         y2 = y1 + self.problem.camera_vision_range * sin(half_of_angle + angle_base)
         x3 = x1 + self.problem.camera_vision_range * cos(angle_base - half_of_angle)
