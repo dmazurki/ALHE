@@ -2,10 +2,11 @@ import camera_placing.state
 
 
 class Problem:
-    def __init__(self, board, camera_angle, camera_range):
+    def __init__(self, board, camera_angle, camera_range, max_cameras):
         self.board = board
         self.camera_vision_angle = camera_angle
         self.camera_vision_range = camera_range
+        self.max_cameras = max_cameras
 
     def generate_initial_state(self):
         return camera_placing.state.State(self)
@@ -26,5 +27,5 @@ class Problem:
         return self.__goal_function(len(state.cameras), not_covered)
 
     def __goal_function(self, cameras, not_covered_points):
-        print 'nc',not_covered_points
+        print 'nc:',not_covered_points, 'cams: ',cameras
         return cameras + not_covered_points

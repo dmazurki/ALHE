@@ -23,6 +23,8 @@ class SimulatedAnnealing:
         self.result = x
 
     def get_result(self):
+        en = self.problem.energy(self.result)
+        print 'ENERGY',en
         return self.result
 
     @staticmethod

@@ -16,7 +16,9 @@ class State:
         new_cameras = [cam.clone() for cam in self.cameras]
         self.mutate_cameras_positions(new_cameras)
 
-        if len(new_cameras) > 0:
+        if len(new_cameras) == self.problem.max_cameras:
+            choice = random.randint(1, 2)
+        elif len(new_cameras) > 0:
             choice = random.randint(0, 2)
         else:
             choice = 0
