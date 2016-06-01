@@ -1,6 +1,7 @@
 from math import sin as sin
 from math import cos as cos
 from math import sqrt as sqrt
+from camera_placing.geometrical_utils import GeometricalUtils
 
 
 class Camera:
@@ -11,6 +12,15 @@ class Camera:
         self.problem = problem
 
     def point_visible(self, x, y):
+        if not self.point_in_range(x, y):
+            return False
+        pointsToCheck = GeometricalUtils.get_points_between(self.x, self.y, x, y)
+        for i in range(0, len(pointsToCheck)):
+            if self.problem.board[pointsToCheck[i].x][pointsToCheck[i].y]:
+                return False
+        return True
+
+    def point_in_range(self, x, y):
         x1 = self.x
         y1 = self.y
         distance = sqrt((x1 - x) ** 2 + (y1 - y) ** 2)
