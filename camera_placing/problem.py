@@ -27,5 +27,4 @@ class Problem:
         return self.__goal_function(len(state.cameras), not_covered)
 
     def __goal_function(self, cameras, not_covered_points):
-        print 'nc:',not_covered_points, 'cams: ',cameras
         return cameras + not_covered_points

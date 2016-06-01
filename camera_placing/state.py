@@ -25,7 +25,7 @@ class State:
         if choice == 0:
             self.generate_additional_camera(new_cameras)
         elif choice == 1:
-            self.mutate_cameras_positions(new_cameras)
+            pass
         else:
             self.remove_camera(new_cameras)
 

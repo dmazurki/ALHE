@@ -1,7 +1,20 @@
-class LinearTemperature:
-    def __init__(self, begin_temperature, step):
-        self.begin_temperature = begin_temperature
-        self.step = step
+import math
+
+
+class GeometricTemperature:
+    def __init__(self, base, parameter):
+        self.base = base
+        self.parameter = parameter
+        self.last_iteration = None
+        self.last_temperature = None
 
     def __call__(self, iteration):
-        return self.begin_temperature - iteration * self.step
+        if self.last_iteration is not None and self.last_iteration == iteration - 1:
+            self.last_iteration = iteration
+            self.last_temperature = self.last_temperature * self.base
+            return self.last_temperature
+        else:
+            self.last_iteration = iteration
+            self.last_temperature = self.parameter * (self.base**iteration)
+            return self.last_temperature
+

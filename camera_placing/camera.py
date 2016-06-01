@@ -14,9 +14,9 @@ class Camera:
     def point_visible(self, x, y):
         if not self.point_in_range(x, y):
             return False
-        pointsToCheck = GeometricalUtils.get_points_between(self.x, self.y, x, y)
-        for i in range(0, len(pointsToCheck)):
-            if self.problem.board[pointsToCheck[i].x][pointsToCheck[i].y]:
+        points_to_check = GeometricalUtils.get_points_between(self.x, self.y, x, y)
+        for i in range(0, len(points_to_check)):
+            if self.problem.board[points_to_check[i].x][points_to_check[i].y]:
                 return False
         return True
 
