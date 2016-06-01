@@ -22,9 +22,14 @@ class Camera:
         y2 = y1 + self.problem.camera_vision_range * sin(half_of_angle + angle_base)
         x3 = x1 + self.problem.camera_vision_range * cos(angle_base - half_of_angle)
         y3 = y1 + self.problem.camera_vision_range * sin(angle_base - half_of_angle)
-        if self.to_the_right_of_line(x1, y1, x2, y2, x, y) and self.to_the_left_of_line(x1, y1, x3, y3, x, y):
-            return True
-        return False
+        if self.problem.camera_vision_angle <= 180:
+            if self.to_the_right_of_line(x1, y1, x2, y2, x, y) and self.to_the_left_of_line(x1, y1, x3, y3, x, y):
+                return True
+            return False
+        else:
+            if self.to_the_right_of_line(x1, y1, x2, y2, x, y) or self.to_the_left_of_line(x1, y1, x3, y3, x, y):
+                return True
+            return False
 
     def clone(self):
         return Camera(self.x, self.y, self.angle, self.problem)
