@@ -14,7 +14,6 @@ class State:
 
     def get_neighbour(self):
         new_cameras = [cam.clone() for cam in self.cameras]
-        self.mutate_cameras_positions(new_cameras)
 
         if len(new_cameras) == self.problem.max_cameras:
             choice = random.randint(1, 2)
@@ -25,7 +24,7 @@ class State:
         if choice == 0:
             self.generate_additional_camera(new_cameras)
         elif choice == 1:
-            pass
+            self.mutate_cameras_positions(new_cameras)
         else:
             self.remove_camera(new_cameras)
 
@@ -49,7 +48,7 @@ class State:
 
     def remove_camera(self, cameras):
         if len(cameras) > 0:
-            del cameras[-1]
+            del cameras[random.randint(0, len(cameras)-1)]
 
     def mutated_camera(self, cam):
         old_x = cam.x
