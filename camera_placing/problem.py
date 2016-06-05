@@ -12,7 +12,10 @@ class Problem:
     def generate_initial_state(self):
         return camera_placing.state.State(self)
 
-    def energy(self, state):
+    def get_cameras_number(self, state):
+        return len(state.cameras)
+
+    def get_not_covered_points(self, state):
         not_covered = 0
         for x in range(0, len(self.board)):
             for y in range(0, len(self.board[x])):
@@ -24,7 +27,9 @@ class Problem:
                     covering = [cam for cam in state.cameras if cam.point_visible(x, y)]
                     if len(covering) == 0:
                         not_covered += 1
+        return not_covered
 
-        return self.quality_function(len(state.cameras), not_covered)
+    def energy(self, state):
+        return self.quality_function(self.get_cameras_number(state), self.get_not_covered_points(state))
 
 

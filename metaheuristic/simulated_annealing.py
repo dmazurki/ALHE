@@ -20,7 +20,6 @@ class SimulatedAnnealing:
                 x = y
             iteration += 1
             temperature = self.temperature(iteration)
-            print x_energy, y_energy, tolerance
         self.result = x
 
     def get_result(self):
