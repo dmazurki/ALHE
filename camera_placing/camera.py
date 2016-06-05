@@ -11,6 +11,7 @@ class Camera:
         self.angle = angle
         self.problem = problem
 
+    #checks if point is in range and angle of vision
     def point_visible(self, x, y):
         if not self.point_in_range(x, y):
             return False
@@ -24,6 +25,7 @@ class Camera:
         x1 = self.x
         y1 = self.y
         distance = sqrt((x1 - x) ** 2 + (y1 - y) ** 2)
+        #check if point is in range
         if distance > self.problem.camera_vision_range:
             return False
         half_of_angle = self.radius_to_radian(self.problem.camera_vision_angle / 2.0)
@@ -44,6 +46,7 @@ class Camera:
     def clone(self):
         return Camera(self.x, self.y, self.angle, self.problem)
 
+    #checks if point is to the left of given line
     @staticmethod
     def to_the_left_of_line(x1, y1, x2, y2, pX, pY):
         v1 = (x2 - x1, y2 - y1)
@@ -54,6 +57,7 @@ class Camera:
         else:
             return False
 
+    #checks if point is to the right of given line
     @staticmethod
     def to_the_right_of_line(x1, y1, x2, y2, pX, pY):
         v1 = (x2 - x1, y2 - y1)

@@ -5,6 +5,7 @@ class GeometricalUtils:
     def __init__(self):
         pass
 
+    #returns list of points match line between given pair of points
     @staticmethod
     def get_points_between(x_a, y_a, x_b, y_b):
         if x_a > x_b:
@@ -31,6 +32,7 @@ class GeometricalUtils:
             return result
         return GeometricalUtils.bresenham_points(a.x, a.y, b.x, b.y)
 
+    #returns list of points they lay
     @staticmethod
     def bresenham_points(x1, y1, x2, y2):
         dx = abs(x2 - x1)
