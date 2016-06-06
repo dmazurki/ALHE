@@ -27,4 +27,7 @@ class SimulatedAnnealing:
 
     @staticmethod
     def tolerance(x_energy, y_energy, temperature):
-        return math.exp(-math.fabs(y_energy - x_energy) / temperature)
+        if temperature == 0:
+            return 0
+        else:
+            return math.exp(-math.fabs(y_energy - x_energy) / temperature)
