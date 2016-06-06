@@ -1,3 +1,4 @@
+#class represents quality function - problem objective function
 class LinearQuality:
     def __init__(self, cameras_number_weight, uncovered_points_weight):
         self.cameras_number_weight = cameras_number_weight

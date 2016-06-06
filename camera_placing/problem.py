@@ -1,6 +1,6 @@
 import camera_placing.state
 
-
+#class represents problem to resolve, contains definitions of problem parameters, room representation and helper methods
 class Problem:
     def __init__(self, board, camera_angle, camera_range, max_cameras, quality_function):
         self.board = board
@@ -15,6 +15,7 @@ class Problem:
     def get_cameras_number(self, state):
         return len(state.cameras)
 
+    #returns list of points which are not visible from any of cameras
     def get_not_covered_points(self, state):
         not_covered = 0
         for x in range(0, len(self.board)):

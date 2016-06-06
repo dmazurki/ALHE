@@ -12,7 +12,7 @@ class State:
         else:
             self.cameras = cameras
 
-    #creating new elemenst according to some specific conditions
+    #creates new elemenst according to some specific conditions
     def get_neighbour(self):
         new_cameras = [cam.clone() for cam in self.cameras]
 
