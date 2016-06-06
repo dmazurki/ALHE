@@ -1,7 +1,7 @@
 import random
 import math
 
-
+#implementation of algorithm
 class SimulatedAnnealing:
     def __init__(self, problem, temperature, iterations):
         self.problem = problem

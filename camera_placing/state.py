@@ -12,6 +12,7 @@ class State:
         else:
             self.cameras = cameras
 
+    #creates new elemenst according to some specific conditions
     def get_neighbour(self):
         new_cameras = [cam.clone() for cam in self.cameras]
 
@@ -50,6 +51,7 @@ class State:
         if len(cameras) > 0:
             del cameras[random.randint(0, len(cameras)-1)]
 
+    #mutates given camera into new example
     def mutated_camera(self, cam):
         old_x = cam.x
         old_y = cam.y
@@ -63,6 +65,7 @@ class State:
         cam.y = old_y + y_diff
         cam.angle = new_angle
 
+    #chekcs if coordinates of given point are inside board
     def point_in_boundaries(self, x, y):
         if x > self.xMax or x < 0:
             return False

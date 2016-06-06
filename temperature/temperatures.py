@@ -1,6 +1,6 @@
 import math
 
-
+#represents temperature used by simulated annealing algorithm
 class GeometricTemperature:
     def __init__(self, base, parameter):
         self.base = base

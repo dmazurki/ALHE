@@ -30,6 +30,7 @@ class BoardUtils:
     def __init__(self):
         pass
 
+    #builds matrix room representation from string
     @staticmethod
     def get_board_from_string(board_string):
         result = [[]]
@@ -43,11 +44,13 @@ class BoardUtils:
 
         return result
 
+    #reads file and loads board
     @staticmethod
     def get_board_from_file(filename):
         f = open(filename, 'r')
         return BoardUtils.get_board_from_string(f.read())
 
+    #Visualizes covegage result
     @staticmethod
     def show_board_representation(board, cameras_state=None):
         result_matrix = numpy.zeros((len(board), len(board[0]),))
