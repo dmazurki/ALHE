@@ -13,3 +13,4 @@ Modules description:
 2.Temperature - contains calculations used by algorithm to determine temperature
 3.Camera placing - contains representation of problem, camera with its state, quality function.
   It also has some geometrical utils to calculate camera vision area.
+4.Experiments - contains some experiments, which change start parameters and present differences in results.
